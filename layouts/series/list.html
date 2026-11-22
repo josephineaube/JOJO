@@ -1,0 +1,18 @@
+{{ define "main" }}
+<section class="series-grid">
+  {{ range .Pages.ByWeight }}
+  <a class="card" href="{{ .RelPermalink }}">
+    <div class="thumb">
+      {{ $cover := .Resources.GetMatch .Params.cover }}
+      {{ if not $cover }}{{ $cover = (.Resources.ByType "image").First }}{{ end }}
+      {{ with $cover }}{{ with .Fill "800x1000 webp q85" }}<img src="{{ .RelPermalink }}" alt="{{ $.Title }}">{{ end }}{{ end }}
+    </div>
+    <div class="card-meta">
+      <span class="mono num">Série {{ .Params.number }}</span>
+      <h2>{{ .Title }}</h2>
+      <p>{{ .Params.description }}</p>
+    </div>
+  </a>
+  {{ end }}
+</section>
+{{ end }}

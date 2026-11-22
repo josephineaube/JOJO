@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+  <meta name="description" content="{{ .Description | default site.Params.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  {{ $css := resources.Get "css/main.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}">
+</head>
+<body>
+  <header class="site-head">
+    <a class="brand" href="{{ site.Home.RelPermalink }}">Dans l’œil de Jo</a>
+    <nav>
+      <a href="{{ "/series/" | relURL }}">Séries</a>
+      <a href="{{ "/about/" | relURL }}">À&nbsp;propos</a>
+      <a href="{{ site.Params.instagram }}" rel="me noopener">Instagram ↗</a>
+    </nav>
+  </header>
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-foot">
+    <p><span>Cabinet de curiosité — Fujifilm × argentique</span><span class="mono">© {{ now.Format "2006" }} · Normandie / France</span></p>
+  </footer>
+</body>
+</html>

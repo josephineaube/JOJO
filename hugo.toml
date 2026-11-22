@@ -1,0 +1,16 @@
+baseURL = 'https://dansloeildejo.pages.dev/'
+locale = 'fr_FR'
+title = "Dans l'œil de Jo"
+enableRobotsTXT = true
+disableKinds = ['taxonomy', 'term']
+
+[params]
+description = "Cabinet de curiosité — Fujifilm × argentique. Photographie, Normandie / France."
+instagram = "https://www.instagram.com/dansloeildejo/"
+
+[imaging]
+resampleFilter = "lanczos"
+[imaging.webp]
+quality = 85
+[imaging.jpeg]
+quality = 88
