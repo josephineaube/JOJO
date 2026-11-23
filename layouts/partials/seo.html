@@ -8,13 +8,15 @@
 
 {{- /* ---------- description ---------- */ -}}
 {{- $desc := .Description -}}
-{{- if and (not $desc) (eq .Section "series") (not .IsSection) -}}
+{{- if and (eq .Section "series") (not .IsSection) -}}
   {{- $bits := slice -}}
   {{- with .Params.lieu }}{{ $bits = $bits | append . }}{{ end -}}
   {{- $bits = $bits | append (.Date.Format "janvier 2006") -}}
   {{- with .Params.appareil }}{{ $bits = $bits | append . }}{{ end -}}
   {{- with .Params.pellicule }}{{ $bits = $bits | append (printf "pellicule %s" .) }}{{ end -}}
-  {{- $desc = printf "%s — %s. %d photographies, série du carnet de Joséphine Aubé." .Title (delimit $bits " · ") .Params.photos -}}
+  {{- $gen := printf "%s — %s. %d photographies, série du carnet de Joséphine Aubé." .Title (delimit $bits " · ") .Params.photos -}}
+  {{- /* une légende de publication trop courte ne tient pas lieu de description */ -}}
+  {{- if not $desc }}{{ $desc = $gen }}{{ else if lt (len $desc) 70 }}{{ $desc = printf "%s — %s" $desc $gen }}{{ end -}}
 {{- end -}}
 {{- if not $desc }}{{ $desc = site.Params.description }}{{ end -}}
 
