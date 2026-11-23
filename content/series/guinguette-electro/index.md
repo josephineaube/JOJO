@@ -1,6 +1,6 @@
 ---
 title: "Guinguette électro"
-number: "41"
+number: "40"
 date: 2026-09-06T09:00:00+01:00
 weight: 41
 cover: "01.jpg"

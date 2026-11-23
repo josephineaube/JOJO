@@ -21,7 +21,10 @@
     {{ $cap := $.Title }}{{ with $.Params.lieu }}{{ if not (in $cap .) }}{{ $cap = printf "%s — %s" $cap . }}{{ end }}{{ end }}
     <figure>
       <a class="zoom" href="{{ with $full }}{{ .RelPermalink }}{{ end }}" data-caption="{{ $cap }}" data-index="{{ $i }}">
-        <img src="{{ partial "thumb.html" (dict "page" $ "n" $i) }}" alt="{{ $.Title }} — photographie {{ $i }} sur {{ $.Params.photos }}" loading="lazy">
+        <img src="{{ with $full }}{{ .RelPermalink }}{{ end }}"
+             {{ with $full }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+             alt="{{ $.Title }} — photographie {{ $i }} sur {{ $.Params.photos }}"
+             loading="{{ if lt $i 3 }}eager{{ else }}lazy{{ end }}">
       </a>
       <figcaption>{{ $n }} / {{ $.Params.photos }}</figcaption>
     </figure>

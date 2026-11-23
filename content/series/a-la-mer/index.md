@@ -1,6 +1,6 @@
 ---
 title: "À la mer"
-number: "34"
+number: "33"
 date: 2026-07-19T09:00:00+01:00
 weight: 34
 cover: "01.jpg"

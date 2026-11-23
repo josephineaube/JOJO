@@ -1,6 +1,6 @@
 ---
 title: "Portrait, été 2026"
-number: "42"
+number: "41"
 date: 2026-10-04T09:00:00+01:00
 weight: 42
 cover: "01.jpg"

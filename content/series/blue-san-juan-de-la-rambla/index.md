@@ -1,6 +1,6 @@
 ---
 title: "Blue — San Juan de la Rambla"
-number: "32"
+number: "31"
 date: 2026-07-11T09:00:00+01:00
 weight: 32
 cover: "01.jpg"

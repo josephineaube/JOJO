@@ -1,6 +1,6 @@
 ---
 title: "Été caniculaire"
-number: "39"
+number: "38"
 date: 2026-08-13T09:00:00+01:00
 weight: 39
 cover: "01.jpg"

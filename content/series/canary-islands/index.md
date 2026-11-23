@@ -1,6 +1,6 @@
 ---
 title: "Canary Islands"
-number: "27"
+number: "26"
 date: 2026-06-17T09:00:00+01:00
 weight: 27
 cover: "01.jpg"

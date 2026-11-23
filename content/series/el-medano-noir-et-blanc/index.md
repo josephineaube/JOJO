@@ -1,6 +1,6 @@
 ---
 title: "El Médano, noir et blanc"
-number: "25"
+number: "24"
 date: 2026-04-29T09:00:00+01:00
 weight: 25
 cover: "01.jpg"

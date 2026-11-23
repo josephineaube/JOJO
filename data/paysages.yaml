@@ -1,0 +1,24 @@
+# Sélection « paysages » de la page d'accueil.
+# slug = dossier dans content/series, n = numéro de la photo dans le bundle.
+hero:
+  slug: eclipse
+  n: 15
+  kicker: "Mer · sable · lumière"
+  title: "Les Canaries"
+
+paysages:
+  - slug: tenerife-gran-canaria
+    n: 1
+    style: big
+  - slug: el-medano
+    n: 13
+    style: big
+  - slug: las-palmas-gran-canaria
+    n: 5
+    style: sq
+  - slug: tenerife-gran-canaria
+    n: 3
+    style: sq
+  - slug: canary-islands
+    n: 9
+    style: sq

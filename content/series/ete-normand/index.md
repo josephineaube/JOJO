@@ -1,6 +1,6 @@
 ---
 title: "Été normand"
-number: "38"
+number: "37"
 date: 2026-08-09T09:00:00+01:00
 weight: 38
 cover: "01.jpg"

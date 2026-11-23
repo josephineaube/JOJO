@@ -1,6 +1,6 @@
 ---
 title: "Ensemble de portraits"
-number: "36"
+number: "35"
 date: 2026-07-26T09:00:00+01:00
 weight: 36
 cover: "01.jpg"
