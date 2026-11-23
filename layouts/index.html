@@ -4,7 +4,7 @@
 {{ $data := site.Data.paysages }}
 {{ with site.GetPage (printf "series/%s" $data.hero.slug) }}
 {{ $hp := . }}
-{{ $hero := .Resources.Get (printf "%02d.jpg" $data.hero.n) }}
+{{ $hero := .Resources.Get (printf "%02d.jpg" $data.hero.photo) }}
 <section class="hero">
   {{ with $hero }}<img src="{{ .RelPermalink }}" alt="{{ $hp.Title }} — {{ site.Title }}" fetchpriority="high">{{ end }}
   <div class="hero-copy">
@@ -30,7 +30,7 @@
   </div>
   <div class="pay-grid">
     {{ range $data.paysages }}
-    {{ $slug := .slug }}{{ $n := .n }}{{ $style := .style }}
+    {{ $slug := .slug }}{{ $n := .photo }}{{ $style := .style }}
     {{ with site.GetPage (printf "series/%s" $slug) }}
     <a class="pay-tile {{ $style }}" href="{{ .RelPermalink }}">
       <div class="pay-img">
