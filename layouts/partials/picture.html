@@ -9,13 +9,20 @@
 {{- $alt := .alt | default .page.Title -}}
 
 {{- if eq $role "stack" -}}
-{{- /* Page publication : webp 900 px en priorité, JPEG d'origine (≤1600 px) en secours. */ -}}
+{{- /* Page publication : ratio NATUREL (pas de recadrage), vignettes 400/760 px,
+       webp 900 px en candidat haute densité. 3 colonnes ≤1300 px, 4 au-delà ;
+       2 colonnes ≤760 px, 1 ≤560 px. La visionneuse ouvre le JPEG d'origine. */ -}}
+{{- $sizes := .sizes | default "(max-width: 560px) 92vw, (max-width: 760px) 44vw, (max-width: 1300px) 30vw, 275px" -}}
+{{- $h := 950 -}}
+{{- with $rel }}{{ $h = div (mul 760 .Height) .Width }}{{ end -}}
 <picture>
+  <source type="image/avif"
+          srcset="{{ printf "%s-400.avif" $thumb | relURL }} 400w, {{ printf "%s.avif" $thumb | relURL }} 760w"
+          sizes="{{ $sizes }}">
   <source type="image/webp"
-          srcset="{{ printf "%s-900.webp" (printf "full/%s/%s" $slug $n) | relURL }} 900w{{ with $rel }}, {{ .RelPermalink }} {{ .Width }}w{{ end }}"
-          sizes="{{ .sizes | default "(max-width: 760px) 92vw, 560px" }}">
-  <img src="{{ with $rel }}{{ .RelPermalink }}{{ end }}"
-       {{ with $rel }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+          srcset="{{ printf "%s-400.webp" $thumb | relURL }} 400w, {{ printf "%s.webp" $thumb | relURL }} 760w, {{ printf "%s-900.webp" (printf "full/%s/%s" $slug $n) | relURL }} 900w"
+          sizes="{{ $sizes }}">
+  <img src="{{ printf "%s.webp" $thumb | relURL }}" width="760" height="{{ $h }}"
        alt="{{ $alt }}" loading="{{ .loading | default "lazy" }}" decoding="async">
 </picture>
 {{- else -}}
