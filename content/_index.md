@@ -1,3 +1,3 @@
 ---
-title: "Dans l'œil de Jo"
+title: "Joséphine Aubé"
 ---

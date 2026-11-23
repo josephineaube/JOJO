@@ -1,42 +1,45 @@
-# Dans l'œil de Jo — site photo
+# Joséphine Aubé — site photo
 
-Site statique Hugo, déployable sur Cloudflare Pages.
+Site statique Hugo, déployé sur Cloudflare Pages (<https://josephine-dht.pages.dev>).
 
-## Ajouter une série (le geste habituel)
+## Structure
+
+- `content/series/<slug>/` — 1 dossier = 1 publication (photos `01.jpg`… + `index.md`)
+- `static/thumbs/<slug>/` — vignettes WebP 760 px générées hors ligne (le build Hugo ne retouche aucune image)
+- `layouts/series/single.html` — page publication (galerie maçonnée + lightbox)
+- `layouts/series/list.html` — archive groupée par année
+- `layouts/partials/logo.html` — médaillon SVG (anneau + lettrage en arc + `static/logo-mark.webp`)
+- `assets/css/main.css` — tout le style (papier crème, Fraunces + IBM Plex Mono)
+
+## Ajouter une publication
 
 ```bash
-hugo new series/ma-nouvelle-serie/index.md   # crée le dossier + frontmatter
-# → déposer les JPG à côté de index.md (nommés 01.jpg, 02.jpg…)
-# → remplir le frontmatter (title, number, cover, description), passer draft: false
-git add content && git commit -m "nouvelle série" && git push
+hugo new series/ma-publication/index.md   # crée le dossier + frontmatter
+# → déposer les JPG à côté de index.md (01.jpg, 02.jpg…)
+# → générer les vignettes : static/thumbs/ma-publication/01.webp…
+# → mettre à jour `photos: N` dans le frontmatter, passer draft: false
+git add content static && git commit -m "nouvelle publication" && git push
 ```
 
-Cloudflare Pages rebuild et publie tout seul après le push.
+Cloudflare Pages rebuild et publie automatiquement après le push.
 
 ## Commandes
 
 ```bash
-hugo server -D          # prévisualiser en local (http://localhost:1313)
-hugo --minify           # build statique → dossier public/
+hugo server              # prévisualiser en local (http://localhost:1313)
+hugo --minify            # build statique → public/
 ```
 
-Binaire Hugo utilisé : v0.170.1 extended (nécessaire pour le traitement d'images/webp).
+Binaire Hugo : v0.170.1 extended (`%LOCALAPPDATA%/hermes/bin/hugo.exe`).
 
 ## Config Cloudflare Pages
 
-- Build command : `hugo --minify`
-- Output directory : `public`
-- Variable d'environnement : `HUGO_VERSION=0.170.1`
+- Projet `josephine`, dépôt `josephineaube/JOJO`
+- Build command : `hugo --minify` — Output directory : `public`
+- Variable d'environnement de **premier niveau** : `HUGO_VERSION=0.170.1`
 
-## Structure
+## Conventions de contenu
 
-- `content/series/<nom>/` — 1 dossier = 1 série (photos + index.md)
-- `layouts/series/single.html` — mise en page d'une série (galerie + lightbox)
-- `layouts/index.html` — accueil (grille des séries)
-- `assets/css/main.css` — tout le style (papier crème, Fraunces + IBM Plex Mono)
-
-## TODO
-
-- [ ] Remplacer les previews 640 px par les originaux (export Instagram)
-- [ ] Connecter le remote GitHub `josephineaube` + Pages
-- [ ] Domaine perso éventuel
+- `number` (01…43) et `weight` = ordre chronologique (1 = la plus ancienne)
+- `lieu`, `appareil`, `pellicule`, `photos` alimentent les métadonnées affichées sous chaque titre
+- `tags` = hashtags d'origine, affichés en pastilles sur la page publication

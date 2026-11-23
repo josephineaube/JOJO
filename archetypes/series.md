@@ -1,11 +1,16 @@
 ---
-title: "Titre de la série"
-number: "V"
+title: "Titre de la publication"
+number: "44"
 date: {{ .Date }}
-weight: 5
+weight: 44
 cover: "01.jpg"
-description: "Une phrase d'accroche pour la grille d'accueil."
+description: "Une phrase d'accroche pour la grille."
+lieu: ""
+appareil: ""
+pellicule: ""
+photos: 1
+tags: []
 draft: true
 ---
 
-Texte d'introduction de la série (optionnel).
+Texte d'introduction (optionnel).

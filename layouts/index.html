@@ -1,23 +1,45 @@
 {{ define "main" }}
+{{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
+{{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
 <section class="hero">
-  <p class="mono kicker">Cabinet de curiosité · Fujifilm × argentique</p>
-  <h1>Dans l’œil de Jo</h1>
-  <p class="lede">Des séries, pas un fil. Chaque ensemble est une petite exposition — un rouleau, une envie, un lieu.</p>
+  <div class="hero-copy">
+    <p class="mono kicker">Photographie · argentique &amp; numérique</p>
+    <h1>Joséphine Aubé</h1>
+    <p class="lede">Des séries, pas un fil. Chaque publication est une petite exposition — un rouleau, une envie, un lieu.</p>
+    <p class="hero-links mono">
+      <a href="{{ "/series/" | relURL }}">{{ len $pubs }} publications · {{ $total }} photographies</a>
+      <span> · </span>
+      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
+    </p>
+  </div>
+  <div class="hero-mark">{{ partial "logo.html" (dict "variant" "full" "class" "medallion") }}</div>
 </section>
-<section class="series-grid">
-  {{ range (where site.RegularPages "Section" "series").ByWeight }}
-  <a class="card" href="{{ .RelPermalink }}">
-    <div class="thumb">
-      {{ $cover := .Resources.GetMatch .Params.cover }}
-      {{ if not $cover }}{{ $cover = (.Resources.ByType "image").First }}{{ end }}
-      {{ with $cover }}{{ with .Fill "800x1000 webp q85" }}<img src="{{ .RelPermalink }}" alt="{{ $.Title }}">{{ end }}{{ end }}
-    </div>
-    <div class="card-meta">
-      <span class="mono num">Série {{ .Params.number }}</span>
-      <h2>{{ .Title }}</h2>
-      <p>{{ .Params.description }}</p>
-    </div>
-  </a>
-  {{ end }}
+
+<section class="about-home">
+  <div class="about-text">
+    <p class="mono kicker">À propos</p>
+    <h2>L’œil de famille</h2>
+    {{ with site.GetPage "/about" }}{{ .Summary }}{{ end }}
+    <p><a class="mono arrow" href="{{ "/about/" | relURL }}">Lire la suite →</a></p>
+  </div>
+</section>
+
+<section class="latest">
+  <header class="section-head">
+    <p class="mono kicker">Dernières publications</p>
+    <a class="mono arrow" href="{{ "/series/" | relURL }}">Tout l’archive →</a>
+  </header>
+  <div class="pub-grid">
+    {{ range first 6 $pubs }}
+    <a class="pub" href="{{ .RelPermalink }}">
+      <div class="thumb"><img src="{{ partial "thumb.html" (dict "page" . "n" 1) }}" alt="{{ .Title }}" loading="lazy"></div>
+      <div class="pub-meta">
+        <span class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "01.2006" }}</span>
+        <h3>{{ .Title }}</h3>
+        <p class="mono dim">{{ with .Params.lieu }}{{ . }} · {{ end }}{{ with .Params.appareil }}{{ . }} · {{ end }}{{ .Params.photos }} photographies</p>
+      </div>
+    </a>
+    {{ end }}
+  </div>
 </section>
 {{ end }}

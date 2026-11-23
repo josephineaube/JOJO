@@ -1,36 +1,85 @@
 {{ define "main" }}
+{{ $slug := path.Base .RelPermalink }}
 <article class="series">
   <header class="series-head">
-    <span class="mono num">Série {{ .Params.number }}</span>
+    <p class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "02 janvier 2006" }}</p>
     <h1>{{ .Title }}</h1>
-    <p class="lede">{{ .Params.description }}</p>
-    <time class="mono" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "January 2006" }}</time>
+    <ul class="series-meta mono">
+      {{ with .Params.lieu }}<li><span>Lieu</span>{{ . }}</li>{{ end }}
+      {{ with .Params.appareil }}<li><span>Appareil</span>{{ . }}</li>{{ end }}
+      {{ with .Params.pellicule }}<li><span>Pellicule</span>{{ . }}</li>{{ end }}
+      <li><span>Photographies</span>{{ .Params.photos }}</li>
+    </ul>
   </header>
-  <div class="series-intro">{{ .Content }}</div>
+
+  {{ with .Content }}<div class="series-intro">{{ . }}</div>{{ end }}
+
+  {{ with .Params.tags }}
+  <ul class="chips">{{ range . }}<li class="mono">#{{ . }}</li>{{ end }}</ul>
+  {{ end }}
+
   <div class="gallery">
-    {{ range .Resources.ByType "image" }}
+    {{ range $i := seq 1 .Params.photos }}
+    {{ $n := printf "%02d" $i }}
+    {{ $full := $.Resources.Get (printf "%s.jpg" $n) }}
     <figure>
-      <a href="{{ .RelPermalink }}" class="zoom">
-        {{ with .Resize "640x webp q85" }}<img src="{{ .RelPermalink }}" loading="lazy" alt="{{ $.Title }}">{{ end }}
+      <a class="zoom" href="{{ with $full }}{{ .RelPermalink }}{{ end }}" data-caption="{{ $.Title }}{{ with $.Params.lieu }} — {{ . }}{{ end }}" data-index="{{ $i }}">
+        <img src="{{ partial "thumb.html" (dict "page" $ "n" $i) }}" alt="{{ $.Title }} — photographie {{ $i }} sur {{ $.Params.photos }}" loading="lazy">
       </a>
+      <figcaption class="mono">{{ $.Title }} <span>{{ $n }}/{{ $.Params.photos }}</span></figcaption>
     </figure>
     {{ end }}
   </div>
+
   <nav class="series-nav">
-    {{ with .NextInSection }}<a class="mono" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ end }}
-    <a href="{{ "/series/" | relURL }}" class="mono">Toutes les séries</a>
-    {{ with .PrevInSection }}<a class="mono" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ end }}
+    {{ with .NextInSection }}<a class="mono arrow" href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<span></span>{{ end }}
+    <a class="mono arrow" href="{{ "/series/" | relURL }}">Toutes les publications</a>
+    {{ with .PrevInSection }}<a class="mono arrow" href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ else }}<span></span>{{ end }}
   </nav>
 </article>
-<div id="lightbox" hidden><img alt=""></div>
+
+<div id="lightbox" hidden>
+  <figure>
+    <img alt="">
+    <figcaption class="mono">
+      <span id="lb-caption"></span>
+      <span id="lb-count"></span>
+    </figcaption>
+  </figure>
+  <button id="lb-prev" class="mono" aria-label="Précédente">←</button>
+  <button id="lb-next" class="mono" aria-label="Suivante">→</button>
+</div>
 <script>
 (function(){
-  var lb = document.getElementById('lightbox'), img = lb.querySelector('img');
-  document.querySelectorAll('.zoom').forEach(function(a){
-    a.addEventListener('click', function(e){ e.preventDefault(); img.src = a.href; lb.hidden = false; document.body.style.overflow = 'hidden'; });
+  var lb = document.getElementById('lightbox');
+  var img = lb.querySelector('img');
+  var cap = document.getElementById('lb-caption');
+  var cnt = document.getElementById('lb-count');
+  var links = Array.prototype.slice.call(document.querySelectorAll('.gallery .zoom'));
+  var idx = 0, total = links.length;
+
+  function show(i){
+    idx = (i + total) % total;
+    var a = links[idx];
+    img.src = a.getAttribute('href');
+    cap.textContent = a.getAttribute('data-caption');
+    cnt.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
+  }
+  function open(i){ show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; }
+  function close(){ lb.hidden = true; img.src = ''; document.body.style.overflow = ''; }
+
+  links.forEach(function(a, i){ a.addEventListener('click', function(e){ e.preventDefault(); open(i); }); });
+  lb.addEventListener('click', function(e){
+    if (e.target.closest('#lb-prev')) { show(idx - 1); return; }
+    if (e.target.closest('#lb-next')) { show(idx + 1); return; }
+    close();
   });
-  lb.addEventListener('click', function(){ lb.hidden = true; img.src=''; document.body.style.overflow=''; });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ lb.hidden = true; img.src=''; document.body.style.overflow=''; } });
+  document.addEventListener('keydown', function(e){
+    if (lb.hidden) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') show(idx - 1);
+    if (e.key === 'ArrowRight') show(idx + 1);
+  });
 })();
 </script>
 {{ end }}

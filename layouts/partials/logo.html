@@ -1,0 +1,22 @@
+{{- $variant := .variant | default "full" -}}
+{{- $class := .class | default "medallion" -}}
+{{- $cx := 500 -}}{{- $cy := 500 -}}
+<svg class="{{ $class }}" viewBox="0 0 1000 1000" role="img" aria-label="Joséphine Aubé — photographie" xmlns="http://www.w3.org/2000/svg">
+  {{- if eq $variant "full" }}
+  <defs>
+    <path id="jo-top" d="M 104 500 A 396 396 0 0 1 896 500" fill="none"/>
+    <path id="jo-bot" d="M 104 500 A 396 396 0 0 0 896 500" fill="none"/>
+  </defs>
+  {{- end }}
+  <circle cx="{{ $cx }}" cy="{{ $cy }}" r="484" fill="none" stroke="currentColor" stroke-width="3.2"/>
+  <circle cx="{{ $cx }}" cy="{{ $cy }}" r="471" fill="none" stroke="currentColor" stroke-width="0.9"/>
+  <image href="{{ "logo-mark.webp" | relURL }}" x="200" y="220" width="600" height="570" preserveAspectRatio="xMidYMid meet"/>
+  {{- if eq $variant "full" }}
+  <text font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="72" font-weight="500" fill="currentColor" letter-spacing="6">
+    <textPath href="#jo-top" startOffset="50%" text-anchor="middle">JOSÉPHINE AUBÉ</textPath>
+  </text>
+  <text font-family="'IBM Plex Mono', ui-monospace, monospace" font-size="52" font-weight="400" fill="currentColor" letter-spacing="9">
+    <textPath href="#jo-bot" startOffset="50%" text-anchor="middle">PHOTOGRAPHIE</textPath>
+  </text>
+  {{- end }}
+</svg>

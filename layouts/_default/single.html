@@ -1,6 +1,7 @@
 {{ define "main" }}
 <article class="prose">
-  <h1>{{ .Title }}</h1>
+  <p class="mono kicker">{{ .Title }}</p>
+  <h1>{{ with .Params.heading }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h1>
   {{ .Content }}
 </article>
 {{ end }}

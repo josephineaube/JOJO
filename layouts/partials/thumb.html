@@ -1,0 +1,3 @@
+{{- /* returns the static thumbnail URL for a photo of the given publication */ -}}
+{{- $slug := path.Base .page.RelPermalink -}}
+{{- printf "thumbs/%s/%02d.webp" $slug .n | relURL -}}

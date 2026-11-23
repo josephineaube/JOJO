@@ -1,12 +1,14 @@
-baseURL = 'https://dansloeildejo.pages.dev/'
+baseURL = 'https://josephine-dht.pages.dev/'
 locale = 'fr_FR'
-title = "Dans l'œil de Jo"
+title = "Joséphine Aubé"
 enableRobotsTXT = true
 disableKinds = ['taxonomy', 'term']
 
 [params]
-description = "Cabinet de curiosité — Fujifilm × argentique. Photographie, Normandie / France."
+description = "Photographie. Publications, séries et carnet d'images — argentique et numérique."
+email = "josephineaube@gmail.com"
 instagram = "https://www.instagram.com/dansloeildejo/"
+instagram_perso = "https://www.instagram.com/josephineaube/"
 
 [imaging]
 resampleFilter = "lanczos"

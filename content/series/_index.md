@@ -1,4 +1,4 @@
 ---
-title: "Séries"
+title: "Publications"
 menu: main
 ---
