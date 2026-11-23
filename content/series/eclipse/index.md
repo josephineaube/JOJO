@@ -8,7 +8,7 @@ description: "Août 2026."
 lieu: "Le Hôme-Varaville, Calvados"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 19
+photos: 18
 tags: ["eclipse", "fujifilm", "fujifilm_xseries", "fujifilmxt30", "normandie"]
 draft: false
 ---

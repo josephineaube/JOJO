@@ -8,7 +8,7 @@ description: "Un des endroits que j’ai préféré à Tenerife !"
 lieu: "San Juan de la Rambla, Ténérife"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 16
+photos: 15
 tags: ["canaryisland", "fujifilmxt3", "puertodelacruz", "sanjuandelaramblatenerife", "tenerife"]
 draft: false
 ---

@@ -8,7 +8,7 @@ description: "Septembre 2026."
 lieu: "Normandie"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 21
+photos: 19
 tags: ["caen", "electro", "fujifilm", "fujifilm_xseries", "photographer"]
 draft: false
 ---

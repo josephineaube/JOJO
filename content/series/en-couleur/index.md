@@ -8,7 +8,7 @@ description: ""
 lieu: "Caen"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 8
+photos: 7
 tags: ["caen", "colorful", "fujifilm", "fujifilmx100vshooters", "fujifilmxt3"]
 draft: false
 ---

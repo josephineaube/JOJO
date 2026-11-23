@@ -8,7 +8,7 @@ description: ""
 lieu: "Las Palmas, Gran Canaria"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 21
+photos: 20
 tags: ["canaryisland", "fujifilmphotography", "fujifilmxt3", "laspalmas", "ɢʀᴀɴᴄᴀɴᴀʀɪᴀ"]
 draft: false
 ---

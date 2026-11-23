@@ -8,7 +8,7 @@ description: ""
 lieu: "Normandie"
 appareil: "Pentax Espio 160"
 pellicule: "Kodak 200"
-photos: 16
+photos: 15
 tags: ["35мм", "kodak", "kodakcolorplus200", "pentax", "pentaxespio"]
 draft: false
 ---

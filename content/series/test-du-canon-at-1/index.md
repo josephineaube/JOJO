@@ -8,7 +8,7 @@ description: "Enfermé dans sa boîte depuis trente ans, ressorti pour l’occas
 lieu: "Normandie"
 appareil: "Canon AT-1"
 pellicule: "Kodak 200"
-photos: 3
+photos: 2
 tags: ["35мм", "analog", "argentique", "canonat1", "kodak"]
 draft: false
 ---

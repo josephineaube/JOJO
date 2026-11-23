@@ -8,7 +8,7 @@ description: "Noir Blanc"
 lieu: "Ténérife, Canaries"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 21
+photos: 20
 tags: ["canaryisland", "fujifilm_xseries", "fujifilmxt30", "photographer", "tenerife"]
 draft: false
 ---

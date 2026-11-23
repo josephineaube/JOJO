@@ -8,7 +8,7 @@ description: ""
 lieu: "El Teide, Ténérife"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 10
+photos: 9
 tags: ["canarias", "fujifilm", "fujifilm_xseries", "teide", "tenerife"]
 draft: false
 ---

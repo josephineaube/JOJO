@@ -8,7 +8,7 @@ description: "Couleur et noir &amp; blanc."
 lieu: "Boca Cangrejo, Ténérife"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 21
+photos: 20
 tags: ["bocacangrejo", "fujifilm", "fujifilm_xseries", "spain", "tenerife"]
 draft: false
 ---

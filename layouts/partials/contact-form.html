@@ -1,0 +1,30 @@
+{{- $to := site.Params.email -}}
+<form class="cform" id="contact-form" action="mailto:{{ $to }}" method="post" enctype="text/plain">
+  <label>Votre nom
+    <input type="text" name="name" autocomplete="name" required>
+  </label>
+  <label>Votre email
+    <input type="email" name="email" autocomplete="email" required>
+  </label>
+  <label>Votre message
+    <textarea name="message" rows="7" required placeholder="Une série, un projet, un tirage, une collaboration…"></textarea>
+  </label>
+  <button type="submit">Envoyer le message</button>
+  <p class="form-note">Le message s’ouvre dans votre logiciel de messagerie, prêt à partir. Vous pouvez aussi écrire directement à
+    <a href="mailto:{{ $to }}">{{ $to }}</a>.</p>
+</form>
+<script>
+(function(){
+  var f = document.getElementById('contact-form');
+  if (!f) return;
+  f.addEventListener('submit', function(e){
+    e.preventDefault();
+    var name = f.elements.name.value.trim();
+    var mail = f.elements.email.value.trim();
+    var msg = f.elements.message.value.trim();
+    var body = 'Nom : ' + name + '\nEmail : ' + mail + '\n\n' + msg;
+    window.location.href = 'mailto:{{ $to }}?subject=' + encodeURIComponent('Contact site — ' + name) +
+      '&body=' + encodeURIComponent(body);
+  });
+})();
+</script>

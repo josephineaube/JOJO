@@ -8,7 +8,7 @@ description: "« Dear friends, here are a few stolen moments."
 lieu: "Ténérife, Canaries"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 21
+photos: 20
 tags: ["fujifilm", "fujifilm_xseries", "portrait", "tenerife"]
 draft: false
 ---

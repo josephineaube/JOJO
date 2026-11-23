@@ -1,36 +1,21 @@
 {{ define "main" }}
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
-<section class="hero">
-  <div class="hero-copy">
+<section class="home-head">
+  <div class="home-copy">
     <p class="mono kicker">Photographie · argentique &amp; numérique</p>
-    <h1>Joséphine Aubé</h1>
     <p class="lede">Des séries, pas un fil. Chaque publication est une petite exposition — un rouleau, une envie, un lieu.</p>
-    <p class="hero-links mono">
-      <a href="{{ "/series/" | relURL }}">{{ len $pubs }} publications · {{ $total }} photographies</a>
-      <span> · </span>
-      <a href="mailto:{{ site.Params.email }}">{{ site.Params.email }}</a>
-    </p>
   </div>
-  <div class="hero-mark">{{ partial "logo.html" (dict "variant" "full" "class" "medallion") }}</div>
-</section>
-
-<section class="about-home">
-  <div class="about-text">
-    <p class="mono kicker">À propos</p>
-    <h2>L’œil de famille</h2>
-    {{ with site.GetPage "/about" }}{{ .Summary }}{{ end }}
-    <p><a class="mono arrow" href="{{ "/about/" | relURL }}">Lire la suite →</a></p>
-  </div>
+  <p class="mono home-stats">
+    <a href="{{ "/series/" | relURL }}">{{ len $pubs }} publications · {{ $total }} photographies</a>
+    <br>
+    <a href="{{ "/contact/" | relURL }}">Une question ? Écrivez-moi</a>
+  </p>
 </section>
 
 <section class="latest">
-  <header class="section-head">
-    <p class="mono kicker">Dernières publications</p>
-    <a class="mono arrow" href="{{ "/series/" | relURL }}">Tout l’archive →</a>
-  </header>
   <div class="pub-grid">
-    {{ range first 6 $pubs }}
+    {{ range first 9 $pubs }}
     <a class="pub" href="{{ .RelPermalink }}">
       <div class="thumb"><img src="{{ partial "thumb.html" (dict "page" . "n" 1) }}" alt="{{ .Title }}" loading="lazy"></div>
       <div class="pub-meta">
@@ -41,5 +26,6 @@
     </a>
     {{ end }}
   </div>
+  <p class="row-link"><a class="arrow" href="{{ "/series/" | relURL }}">Tout l’archive →</a></p>
 </section>
 {{ end }}

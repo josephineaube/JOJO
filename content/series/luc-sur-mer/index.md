@@ -8,7 +8,7 @@ description: ""
 lieu: "Normandie"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 7
+photos: 6
 tags: ["fuji", "fujifilm", "fujifilmx100vshooters", "fujifilmxt30", "lucsurmer", "normandie", "photographer", "photos"]
 draft: false
 ---

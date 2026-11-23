@@ -8,7 +8,7 @@ description: ""
 lieu: ""
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 10
+photos: 9
 tags: ["friends", "fujifilm", "fujifilm_xseries", "fujifilmx100vshooters", "fujifilmxt30", "normandie", "photoftheday", "photographer", "photography"]
 draft: false
 ---

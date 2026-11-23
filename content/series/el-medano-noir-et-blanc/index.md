@@ -8,7 +8,7 @@ description: ""
 lieu: ""
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 14
+photos: 13
 tags: ["elmedano", "fujifilm_xseries", "fujifilmphotography", "fujifilmxt30", "tenerife"]
 draft: false
 ---

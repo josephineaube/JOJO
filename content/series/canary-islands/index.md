@@ -8,7 +8,7 @@ description: "Ténérife, El Médano, Gran Canaria — pellicule Kodak 200."
 lieu: "Îles Canaries"
 appareil: "Minolta Dynax"
 pellicule: "Kodak 200"
-photos: 13
+photos: 12
 tags: ["argentique", "canarias", "kodak", "minolta", "tenerife"]
 draft: false
 ---

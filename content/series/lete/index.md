@@ -8,7 +8,7 @@ description: ""
 lieu: "Normandie"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 8
+photos: 7
 tags: ["colour", "friend", "fujifilm", "fujifilmxt30", "normandie", "photo", "photographer"]
 draft: false
 ---

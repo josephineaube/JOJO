@@ -8,7 +8,7 @@ description: ""
 lieu: "Îles Canaries"
 appareil: "Kodak Sport"
 pellicule: ""
-photos: 13
+photos: 12
 tags: ["35mmfilm", "canarieislands", "kodak", "kodaksport", "normandie"]
 draft: false
 ---

@@ -8,7 +8,7 @@ description: ""
 lieu: "Normandie"
 appareil: "Pentax (argentique)"
 pellicule: "Noir & blanc"
-photos: 13
+photos: 12
 tags: ["analog", "blackandwhite", "pentax"]
 draft: false
 ---

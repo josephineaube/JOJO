@@ -8,7 +8,7 @@ description: "Noir et blanc."
 lieu: "Normandie"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 7
+photos: 6
 tags: ["fujifilm", "fujifilmx100vshooters", "fujifilmxt3", "fujilovers", "photographer"]
 draft: false
 ---

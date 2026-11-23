@@ -8,7 +8,7 @@ description: "Les images de mon grand-père Jean Claude, photographe, fin des an
 lieu: "San Francisco"
 appareil: "Canon AT-1"
 pellicule: ""
-photos: 12
+photos: 11
 tags: ["analog", "canon", "kodak", "photographer", "sanfrancisco"]
 draft: false
 ---

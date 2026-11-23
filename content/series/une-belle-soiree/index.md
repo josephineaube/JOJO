@@ -8,7 +8,7 @@ description: "Avec l’appareil de mon grand père, tout un symbole !!"
 lieu: "Caen"
 appareil: "Canon AT-1"
 pellicule: "Kodak 200"
-photos: 13
+photos: 12
 tags: ["analog", "caen", "canonat1", "football", "kodak"]
 draft: false
 ---

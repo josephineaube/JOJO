@@ -8,7 +8,7 @@ description: ""
 lieu: "Îles Canaries"
 appareil: ""
 pellicule: ""
-photos: 9
+photos: 8
 tags: ["canaryisland", "grancanaria", "photographer", "tenerife", "travel"]
 draft: false
 ---

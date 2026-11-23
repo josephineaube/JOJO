@@ -8,7 +8,7 @@ description: "Été 2025."
 lieu: "Caen"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 3
+photos: 2
 tags: ["color", "fujifilm", "fujifilmx100vshooters", "fujifilmxt30ⅱ", "tourdefrance"]
 draft: false
 ---

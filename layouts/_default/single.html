@@ -1,7 +1,9 @@
 {{ define "main" }}
 <article class="prose">
+  {{ if .Params.medallion }}<div class="about-mark">{{ partial "logo.html" (dict "variant" "full" "class" "medallion") }}</div>{{ end }}
   <p class="mono kicker">{{ .Title }}</p>
   <h1>{{ with .Params.heading }}{{ . }}{{ else }}{{ .Title }}{{ end }}</h1>
   {{ .Content }}
+  {{ if .Params.contact_form }}{{ partial "contact-form.html" . }}{{ end }}
 </article>
 {{ end }}

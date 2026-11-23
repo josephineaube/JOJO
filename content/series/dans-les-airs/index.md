@@ -8,7 +8,7 @@ description: ""
 lieu: "Normandie"
 appareil: ""
 pellicule: ""
-photos: 7
+photos: 6
 tags: ["friends", "intheair", "photo", "photographer"]
 draft: false
 ---

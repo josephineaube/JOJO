@@ -8,7 +8,7 @@ description: ""
 lieu: "El Médano, Ténérife"
 appareil: "Fujifilm X-T30"
 pellicule: ""
-photos: 7
+photos: 6
 tags: ["canaryislands", "elmedano", "fujifilm", "fujifilmxt3", "tenerife"]
 draft: false
 ---
