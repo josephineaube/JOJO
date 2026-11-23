@@ -20,7 +20,7 @@
     {{- end }}
     {{- end }}
     {{- else if $p.IsHome }}
-    {{- range hugo.Data.paysages.paysages }}
+    {{- range site.Data.paysages.paysages }}
     {{- $pn := .photo }}
     {{- $pp := . }}
     {{- with site.GetPage (printf "series/%s" $pp.slug) }}

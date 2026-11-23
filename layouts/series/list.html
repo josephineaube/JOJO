@@ -2,7 +2,7 @@
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
 {{ $groups := $pubs.GroupByDate "2006" }}
-{{ $themes := hugo.Data.themes.themes }}
+{{ $themes := site.Data.themes.themes }}
 <section class="page-head">
   <p class="mono kicker">Archive</p>
   <h1>Publications</h1>

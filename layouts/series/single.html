@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $slug := path.Base .RelPermalink }}
 {{ $themes := slice }}
-{{ range hugo.Data.themes.themes }}{{ if in .slugs $slug }}{{ $themes = $themes | append . }}{{ end }}{{ end }}
+{{ range site.Data.themes.themes }}{{ if in .slugs $slug }}{{ $themes = $themes | append . }}{{ end }}{{ end }}
 <article class="series">
   <header class="series-head">
     <p class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "02 janvier 2006" }}</p>

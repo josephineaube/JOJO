@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
-{{ $data := hugo.Data.paysages }}
+{{ $data := site.Data.paysages }}
 <section class="masthead">
   <p class="mono kicker">Carnet photographique</p>
   <h1>Des séries, des lieux,<br class="br-lg"> <em>de la lumière</em>.</h1>
