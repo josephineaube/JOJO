@@ -1,19 +1,44 @@
 {{ define "main" }}
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
+{{ $groups := $pubs.GroupByDate "2006" }}
+{{ $themes := hugo.Data.themes.themes }}
 <section class="page-head">
   <p class="mono kicker">Archive</p>
   <h1>Publications</h1>
-  <p class="lede">{{ len $pubs }} publications et {{ $total }} photographies, dans l’ordre du carnet — de la plus récente à la plus ancienne.</p>
+  <p class="lede">{{ len $pubs }} publications et {{ $total }} photographies — du carnet le plus récent au plus ancien.</p>
+  <p class="mono year-jump dim">
+    {{ range $i, $g := $groups }}{{ if $i }} · {{ end }}<a href="#an-{{ .Key }}">{{ .Key }}</a>{{ end }}
+  </p>
 </section>
 
-{{ range $pubs.GroupByDate "2006" }}
-<section class="year-block">
+<section class="theme-index" aria-labelledby="themes-titre">
+  <h2 class="sr-only" id="themes-titre">Thèmes</h2>
+  <div class="chips" role="group" aria-label="Filtrer par thème">
+    <button type="button" class="chip is-active" data-theme="all" aria-pressed="true">Tout<span class="chip-count">{{ len $pubs }}</span></button>
+    {{ range $themes }}
+    <button type="button" class="chip" data-theme="{{ .id }}" data-blurb="{{ .blurb }}" aria-pressed="false">{{ .label }}<span class="chip-count">{{ len .slugs }}</span></button>
+    {{ end }}
+  </div>
+  <p class="theme-blurb mono dim" id="theme-blurb">Sélection thématique — cliquez un thème pour filtrer l’archive.</p>
+</section>
+
+{{ range $groups }}
+<section class="year-block" id="an-{{ .Key }}">
   <h2 class="year mono">{{ .Key }}</h2>
   <div class="pub-grid">
     {{ range .Pages.ByWeight.Reverse }}
-    <a class="pub" href="{{ .RelPermalink }}">
-      <div class="thumb"><img src="{{ partial "thumb.html" (dict "page" . "n" 1) }}" alt="{{ .Title }}" loading="lazy"></div>
+    {{ $slug := path.Base .RelPermalink }}
+    {{ $ids := slice }}
+    {{ range $themes }}{{ if in .slugs $slug }}{{ $ids = $ids | append .id }}{{ end }}{{ end }}
+    {{ $t := .Title }}
+    {{ $alt := printf "%s — photographie de couverture" $t }}
+    {{ with .Params.lieu }}{{ $alt = printf "%s, %s" $t . }}{{ end }}
+    {{ with .Params.appareil }}{{ $alt = printf "%s, %s" $alt . }}{{ end }}
+    <a class="pub js-pub" href="{{ .RelPermalink }}" data-themes="{{ delimit $ids " " }}">
+      <div class="thumb">
+        {{ partial "picture.html" (dict "page" . "n" 1 "role" "card" "alt" $alt) }}
+      </div>
       <div class="pub-meta">
         <span class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "02.01.2006" }}</span>
         <h3>{{ .Title }}</h3>
@@ -24,4 +49,50 @@
   </div>
 </section>
 {{ end }}
+
+<p class="theme-empty mono dim" id="theme-empty" hidden>Aucune publication dans ce thème.</p>
+
+<script>
+(function(){
+  var chips = Array.prototype.slice.call(document.querySelectorAll('.chip'));
+  var cards = Array.prototype.slice.call(document.querySelectorAll('.js-pub'));
+  var blocks = Array.prototype.slice.call(document.querySelectorAll('.year-block'));
+  var blurb = document.getElementById('theme-blurb');
+  var empty = document.getElementById('theme-empty');
+  var base = 'Sélection thématique — cliquez un thème pour filtrer l’archive.';
+
+  function apply(theme, label, text){
+    var n = 0;
+    cards.forEach(function(c){
+      var ok = theme === 'all' || (c.dataset.themes || '').split(' ').indexOf(theme) > -1;
+      c.hidden = !ok;
+      if (ok) n++;
+    });
+    blocks.forEach(function(b){
+      b.hidden = !b.querySelectorAll('.js-pub:not([hidden])').length;
+    });
+    empty.hidden = n !== 0;
+    blurb.textContent = text || base;
+    chips.forEach(function(c){
+      var on = c.dataset.theme === theme;
+      c.classList.toggle('is-active', on);
+      c.setAttribute('aria-pressed', on ? 'true' : 'false');
+    });
+    var url = theme === 'all' ? location.pathname : location.pathname + '?theme=' + theme;
+    history.replaceState(null, '', url + location.hash);
+  }
+
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){
+      apply(c.dataset.theme, c.textContent, c.dataset.blurb);
+    });
+  });
+
+  var wanted = new URLSearchParams(location.search).get('theme');
+  if (wanted) {
+    var chip = chips.filter(function(c){ return c.dataset.theme === wanted; })[0];
+    if (chip) apply(wanted, chip.textContent, chip.dataset.blurb);
+  }
+})();
+</script>
 {{ end }}

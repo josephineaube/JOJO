@@ -1,0 +1,81 @@
+# Index thématique de l'archive (page /series/).
+# Une publication peut appartenir à plusieurs thèmes (portraits des Canaries, etc.).
+# `slugs` = nom du dossier dans content/series/.
+
+themes:
+  - id: canaries
+    label: Îles Canaries
+    blurb: Ténérife, Gran Canaria, El Médano — lumière volcanique et Atlantique.
+    slugs:
+      - tenerife-2026
+      - el-medano
+      - el-medano-noir-et-blanc
+      - un-dia-en-la-playa
+      - yellow-el-medano
+      - playa-de-berruguete
+      - el-teide-tenerife
+      - las-palmas-gran-canaria
+      - blue-san-juan-de-la-rambla
+      - canary-islands
+      - tenerife-gran-canaria
+      - a-la-mer
+      - ensemble-de-portraits
+
+  - id: portraits
+    label: Portraits
+    blurb: Visages, amis, inconnus — pris sur le vif ou posés.
+    slugs:
+      - portrait-ete-2026
+      - portrait-damis
+      - portrait-noir-et-blanc
+      - portrait-darthur
+      - portrait-de-cecilia
+      - portrait-de-manon
+      - portrait-de-pauline
+      - portrait-mariya-cesar
+      - nathanael-halima
+      - amis-en-noir-et-blanc
+      - ensemble-de-portraits
+
+  - id: normandie
+    label: Normandie
+    blurb: Le pays quotidien — côte, été, soirées, hiver.
+    slugs:
+      - ete-normand
+      - ete-caniculaire
+      - guinguette-electro
+      - noir-et-blanc-hiver
+      - luc-sur-mer
+      - en-ete
+      - en-couleur
+      - dans-les-airs
+      - en-vol
+      - lete
+      - tour-de-france
+      - une-belle-soiree
+      - bonus-fin-de-pellicule
+      - eclipse
+
+  - id: argentique
+    label: Argentique
+    blurb: Pellicule 35 mm — Kodak, Pentax Espio, Canon AE-1 et compagnie.
+    slugs:
+      - ete-caniculaire
+      - bonus-fin-de-pellicule
+      - test-du-canon-at-1
+      - une-belle-soiree
+      - noir-et-blanc-hiver
+      - canary-islands
+      - a-la-mer
+      - bonne-annee
+
+  - id: noir-et-blanc
+    label: Noir & blanc
+    blurb: Sans couleur, tout en lumière.
+    slugs:
+      - tenerife-2026
+      - el-medano-noir-et-blanc
+      - noir-et-blanc-hiver
+      - portrait-noir-et-blanc
+      - amis-en-noir-et-blanc
+      - playa-de-berruguete

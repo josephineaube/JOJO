@@ -1,0 +1,37 @@
+{{ printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  {{- range .Data.Pages }}
+  {{- $p := . }}
+  {{- if ne .Kind "404" }}
+  <url>
+    <loc>{{ $p.Permalink }}</loc>
+    {{- if not $p.Lastmod.IsZero }}
+    <lastmod>{{ $p.Lastmod.Format "2006-01-02T15:04:05-07:00" | safeHTML }}</lastmod>
+    {{- end }}
+    {{- if and (eq $p.Section "series") (not $p.IsSection) }}
+    {{- range $i := seq 1 $p.Params.photos }}
+    {{- $n := printf "%02d" $i }}
+    {{- with $p.Resources.Get (printf "%s.jpg" $n) }}
+    <image:image>
+      <image:loc>{{ .Permalink }}</image:loc>
+      <image:title>{{ $p.Title }} — photographie {{ $i }} sur {{ $p.Params.photos }}</image:title>
+      <image:caption>{{ $p.Title }}{{ with $p.Params.lieu }} — {{ . }}{{ end }}{{ with $p.Params.appareil }} — {{ . }}{{ end }}</image:caption>
+    </image:image>
+    {{- end }}
+    {{- end }}
+    {{- else if $p.IsHome }}
+    {{- range hugo.Data.paysages.paysages }}
+    {{- $pn := .photo }}
+    {{- $pp := . }}
+    {{- with site.GetPage (printf "series/%s" $pp.slug) }}
+    <image:image>
+      <image:loc>{{ printf "thumbs/%s/%02d.webp" (path.Base .RelPermalink) $pn | absURL }}</image:loc>
+      <image:title>{{ .Title }}{{ with .Params.lieu }} — {{ . }}{{ end }}</image:title>
+    </image:image>
+    {{- end }}
+    {{- end }}
+    {{- end }}
+  </url>
+  {{- end }}
+  {{- end }}
+</urlset>

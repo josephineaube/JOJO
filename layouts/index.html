@@ -1,25 +1,26 @@
 {{ define "main" }}
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
-{{ $data := site.Data.paysages }}
-{{ with site.GetPage (printf "series/%s" $data.hero.slug) }}
-{{ $hp := . }}
-{{ $hero := .Resources.Get (printf "%02d.jpg" $data.hero.photo) }}
-<section class="hero">
-  {{ with $hero }}<img src="{{ .RelPermalink }}" alt="{{ $hp.Title }} — {{ site.Title }}" fetchpriority="high">{{ end }}
-  <div class="hero-copy">
-    <p class="mono kicker">{{ $data.hero.kicker }}</p>
-    <h1>{{ $data.hero.title }}</h1>
-    <p class="mono hero-link"><a href="{{ .RelPermalink }}">Nº {{ .Params.number }} · {{ .Title }} ↗</a></p>
-  </div>
+{{ $data := hugo.Data.paysages }}
+<section class="masthead">
+  <p class="mono kicker">Carnet photographique</p>
+  <h1>Des séries, des lieux,<br class="br-lg"> <em>de la lumière</em>.</h1>
+  <p class="mast-lead">Portraits pris sur le vif, paysages, carnets de route : chaque publication est un ensemble, jamais une image isolée.</p>
+  <p class="mast-actions">
+    <a class="btn" href="{{ "/series/" | relURL }}">Voir les publications</a>
+    <a class="btn ghost" href="{{ "/contact/" | relURL }}">Un projet&nbsp;?</a>
+  </p>
 </section>
-{{ end }}
 
 <section class="home-strip">
   <p class="mono home-stats">
     <a href="{{ "/series/" | relURL }}">{{ len $pubs }} publications · {{ $total }} photographies</a>
     <span class="sep">—</span>
-    <a href="{{ "/contact/" | relURL }}">Une question ? Écrivez-moi</a>
+    <a href="{{ "/series/" | relURL }}?theme=canaries">Îles Canaries</a>
+    <span class="sep">·</span>
+    <a href="{{ "/series/" | relURL }}?theme=portraits">Portraits</a>
+    <span class="sep">·</span>
+    <a href="{{ "/series/" | relURL }}?theme=argentique">Argentique</a>
   </p>
 </section>
 
@@ -32,10 +33,12 @@
     {{ range $data.paysages }}
     {{ $slug := .slug }}{{ $n := .photo }}{{ $style := .style }}
     {{ with site.GetPage (printf "series/%s" $slug) }}
+    {{ $t := .Title }}
+    {{ $alt := printf "%s — paysage" $t }}
+    {{ with .Params.lieu }}{{ $alt = printf "%s, %s" $t . }}{{ end }}
     <a class="pay-tile {{ $style }}" href="{{ .RelPermalink }}">
       <div class="pay-img">
-        <img src="{{ partial "thumb.html" (dict "page" . "n" $n) }}"
-             alt="{{ .Title }}{{ with .Params.lieu }} — {{ . }}{{ end }}" loading="lazy">
+        {{ partial "picture.html" (dict "page" . "n" $n "role" "tile" "alt" $alt) }}
       </div>
       <p class="mono dim">Nº {{ .Params.number }} · {{ .Title }}{{ with .Params.lieu }} · {{ . }}{{ end }}</p>
     </a>
@@ -51,8 +54,14 @@
   </div>
   <div class="pub-grid">
     {{ range first 9 $pubs }}
+    {{ $t := .Title }}
+    {{ $alt := printf "%s — photographie de couverture" $t }}
+    {{ with .Params.lieu }}{{ $alt = printf "%s, %s" $t . }}{{ end }}
+    {{ with .Params.appareil }}{{ $alt = printf "%s, %s" $alt . }}{{ end }}
     <a class="pub" href="{{ .RelPermalink }}">
-      <div class="thumb"><img src="{{ partial "thumb.html" (dict "page" . "n" 1) }}" alt="{{ .Title }}" loading="lazy"></div>
+      <div class="thumb">
+        {{ partial "picture.html" (dict "page" . "n" 1 "role" "card" "alt" $alt) }}
+      </div>
       <div class="pub-meta">
         <span class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "01.2006" }}</span>
         <h3>{{ .Title }}</h3>

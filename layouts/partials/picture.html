@@ -1,0 +1,36 @@
+{{- /* picture.html — <picture> AVIF/WebP + srcset pour une photo d'une publication.
+       dict : page (la page publication), n (numéro de photo), role = card | tile | stack | lightbox
+       Les dérivés sont produits par scripts/site-assets.py (statique, pas de traitement Hugo). */ -}}
+{{- $slug := path.Base .page.RelPermalink -}}
+{{- $n := printf "%02d" .n -}}
+{{- $role := .role | default "card" -}}
+{{- $rel := .page.Resources.Get (printf "%s.jpg" $n) -}}
+{{- $thumb := printf "thumbs/%s/%s" $slug $n -}}
+{{- $alt := .alt | default .page.Title -}}
+
+{{- if eq $role "stack" -}}
+{{- /* Page publication : webp 900 px en priorité, JPEG d'origine (≤1600 px) en secours. */ -}}
+<picture>
+  <source type="image/webp"
+          srcset="{{ printf "%s-900.webp" (printf "full/%s/%s" $slug $n) | relURL }} 900w{{ with $rel }}, {{ .RelPermalink }} {{ .Width }}w{{ end }}"
+          sizes="{{ .sizes | default "(max-width: 760px) 92vw, 560px" }}">
+  <img src="{{ with $rel }}{{ .RelPermalink }}{{ end }}"
+       {{ with $rel }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
+       alt="{{ $alt }}" loading="{{ .loading | default "lazy" }}" decoding="async">
+</picture>
+{{- else -}}
+{{- $sizes := .sizes -}}
+{{- if not $sizes -}}
+  {{- $sizes = cond (eq $role "tile") "(max-width: 760px) 92vw, (max-width: 1000px) 45vw, 380px" "(max-width: 760px) 46vw, (max-width: 1000px) 32vw, 300px" -}}
+{{- end -}}
+<picture>
+  <source type="image/avif"
+          srcset="{{ printf "%s-400.avif" $thumb | relURL }} 400w, {{ printf "%s.avif" $thumb | relURL }} 760w"
+          sizes="{{ $sizes }}">
+  <source type="image/webp"
+          srcset="{{ printf "%s-400.webp" $thumb | relURL }} 400w, {{ printf "%s.webp" $thumb | relURL }} 760w"
+          sizes="{{ $sizes }}">
+  <img src="{{ printf "%s.webp" $thumb | relURL }}" width="760" height="950"
+       alt="{{ $alt }}" loading="{{ .loading | default "lazy" }}" decoding="async">
+</picture>
+{{- end -}}

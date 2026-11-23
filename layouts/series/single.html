@@ -1,5 +1,7 @@
 {{ define "main" }}
 {{ $slug := path.Base .RelPermalink }}
+{{ $themes := slice }}
+{{ range hugo.Data.themes.themes }}{{ if in .slugs $slug }}{{ $themes = $themes | append . }}{{ end }}{{ end }}
 <article class="series">
   <header class="series-head">
     <p class="mono num">Nº {{ .Params.number }} · {{ .Date.Format "02 janvier 2006" }}</p>
@@ -10,6 +12,11 @@
       {{ with .Params.pellicule }}<li><span>Pellicule</span>{{ . }}</li>{{ end }}
       <li><span>Photographies</span>{{ .Params.photos }}</li>
     </ul>
+    {{ with $themes }}
+    <p class="series-themes">
+      {{ range . }}<a class="chip chip-sm" href="{{ "/series/" | relURL }}?theme={{ .id }}">{{ .label }}</a>{{ end }}
+    </p>
+    {{ end }}
   </header>
 
   {{ with .Content }}<div class="series-intro">{{ . }}</div>{{ end }}
@@ -19,26 +26,27 @@
     {{ $n := printf "%02d" $i }}
     {{ $full := $.Resources.Get (printf "%s.jpg" $n) }}
     {{ $cap := $.Title }}{{ with $.Params.lieu }}{{ if not (in $cap .) }}{{ $cap = printf "%s — %s" $cap . }}{{ end }}{{ end }}
+    {{ $alt := printf "%s, photographie %d sur %d" $.Title $i $.Params.photos }}
+    {{ with $.Params.lieu }}{{ $alt = printf "%s, %s" $alt . }}{{ end }}
+    {{ $alt = printf "%s, %s" $alt ($.Date.Format "2006") }}
     <figure>
       <a class="zoom" href="{{ with $full }}{{ .RelPermalink }}{{ end }}" data-caption="{{ $cap }}" data-index="{{ $i }}">
-        <img src="{{ with $full }}{{ .RelPermalink }}{{ end }}"
-             {{ with $full }}width="{{ .Width }}" height="{{ .Height }}"{{ end }}
-             alt="{{ $.Title }} — photographie {{ $i }} sur {{ $.Params.photos }}"
-             loading="{{ if lt $i 3 }}eager{{ else }}lazy{{ end }}">
+        {{ partial "picture.html" (dict "page" $ "n" $i "role" "stack" "alt" $alt
+            "loading" (cond (lt $i 3) "eager" "lazy")) }}
       </a>
       <figcaption>{{ $n }} / {{ $.Params.photos }}</figcaption>
     </figure>
     {{ end }}
   </div>
 
-  <nav class="series-nav">
+  <nav class="series-nav" aria-label="Navigation entre publications">
     {{ with .NextInSection }}<a href="{{ .RelPermalink }}">← {{ .Title }}</a>{{ else }}<span></span>{{ end }}
     <a href="{{ "/series/" | relURL }}">Toutes les publications</a>
     {{ with .PrevInSection }}<a href="{{ .RelPermalink }}">{{ .Title }} →</a>{{ else }}<span></span>{{ end }}
   </nav>
 </article>
 
-<div id="lightbox" hidden>
+<div id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Visionneuse">
   <figure>
     <img alt="">
     <figcaption>
@@ -46,8 +54,8 @@
       <span id="lb-count"></span>
     </figcaption>
   </figure>
-  <button id="lb-prev" aria-label="Précédente">←</button>
-  <button id="lb-next" aria-label="Suivante">→</button>
+  <button id="lb-prev" aria-label="Photographie précédente">←</button>
+  <button id="lb-next" aria-label="Photographie suivante">→</button>
 </div>
 <script>
 (function(){
@@ -56,29 +64,45 @@
   var cap = document.getElementById('lb-caption');
   var cnt = document.getElementById('lb-count');
   var links = Array.prototype.slice.call(document.querySelectorAll('.stack .zoom'));
-  var idx = 0, total = links.length;
+  var idx = 0, total = links.length, lastFocus = null;
 
   function show(i){
     idx = (i + total) % total;
     var a = links[idx];
     img.src = a.getAttribute('href');
+    img.alt = a.querySelector('img') ? a.querySelector('img').alt : '';
     cap.textContent = a.getAttribute('data-caption');
     cnt.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
   }
-  function open(i){ show(i); lb.hidden = false; document.body.style.overflow = 'hidden'; }
-  function close(){ lb.hidden = true; img.src = ''; document.body.style.overflow = ''; }
+  function open(i){
+    lastFocus = document.activeElement;
+    show(i); lb.hidden = false; document.body.style.overflow = 'hidden';
+    document.getElementById('lb-next').focus();
+  }
+  function close(){
+    lb.hidden = true; img.src = ''; document.body.style.overflow = '';
+    if (lastFocus) lastFocus.focus();
+  }
 
   links.forEach(function(a, i){ a.addEventListener('click', function(e){ e.preventDefault(); open(i); }); });
   lb.addEventListener('click', function(e){
     if (e.target.closest('#lb-prev')) { show(idx - 1); return; }
     if (e.target.closest('#lb-next')) { show(idx + 1); return; }
-    close();
+    if (e.target === img) { show(idx + 1); return; }   /* clic sur la photo = suivante */
+    if (e.target.closest('figure')) return;            /* légende : ne ferme pas */
+    close();                                            /* clic sur le fond = fermer */
   });
   document.addEventListener('keydown', function(e){
     if (lb.hidden) return;
     if (e.key === 'Escape') close();
     if (e.key === 'ArrowLeft') show(idx - 1);
     if (e.key === 'ArrowRight') show(idx + 1);
+    if (e.key === 'Tab') {                                     /* focus piégé dans la visionneuse */
+      var focusables = lb.querySelectorAll('button');
+      var first = focusables[0], last = focusables[focusables.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
   });
 })();
 </script>
