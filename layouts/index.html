@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{ $pubs := (where site.RegularPages "Section" "series").ByWeight.Reverse }}
 {{ $total := 0 }}{{ range $pubs }}{{ $total = add $total .Params.photos }}{{ end }}
-{{ $data := hugo.Data.paysages }}
+{{ $data := site.Data.paysages }}
 {{ with site.GetPage (printf "series/%s" $data.hero.slug) }}
 {{ $hp := . }}
 {{ $hero := .Resources.Get (printf "%02d.jpg" $data.hero.n) }}
