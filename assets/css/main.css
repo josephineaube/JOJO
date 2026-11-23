@@ -41,6 +41,8 @@
 }
 
 * { box-sizing: border-box; }
+/* l'attribut hidden doit gagner contre les display: block/grid des composants */
+[hidden] { display: none !important; }
 html { -webkit-text-size-adjust: 100%; overflow-x: hidden; scroll-behavior: smooth; }
 body {
   margin: 0; background: var(--bg); color: var(--ink);
