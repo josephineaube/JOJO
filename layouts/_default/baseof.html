@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
+  <title>{{ if eq .Kind "404" }}Page introuvable · {{ else if not .IsHome }}{{ .Title }} · {{ end }}{{ site.Title }}</title>
   {{ partial "seo.html" . }}
   <meta name="theme-color" content="#f6f5ec">
   <link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="any">

@@ -1,0 +1,11 @@
+{{ define "main" }}
+<section class="page-head">
+  <p class="mono kicker">Erreur 404</p>
+  <h1>Cette page n’existe pas</h1>
+  <p class="lede">Le lien est peut-être ancien, ou la publication a été retirée de l’archive.</p>
+  <p class="mast-actions">
+    <a class="btn" href="{{ "/series/" | relURL }}">Voir les publications</a>
+    <a class="btn ghost" href="{{ "/" | relURL }}">Retour à l’accueil</a>
+  </p>
+</section>
+{{ end }}
