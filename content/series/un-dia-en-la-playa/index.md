@@ -1,6 +1,6 @@
 ---
 title: "Un día en la playa"
-number: "22"
+number: "15"
 date: 2026-04-24T09:00:00+01:00
 weight: 23
 cover: "01.jpg"

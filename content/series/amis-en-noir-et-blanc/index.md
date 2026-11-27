@@ -1,6 +1,6 @@
 ---
 title: "Amis en noir et blanc"
-number: "16"
+number: "12"
 date: 2026-02-11T09:00:00+01:00
 weight: 16
 cover: "01.jpg"

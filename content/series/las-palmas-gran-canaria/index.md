@@ -1,6 +1,6 @@
 ---
 title: "Las Palmas — Gran Canaria"
-number: "29"
+number: "22"
 date: 2026-07-04T09:00:00+01:00
 weight: 30
 cover: "01.jpg"

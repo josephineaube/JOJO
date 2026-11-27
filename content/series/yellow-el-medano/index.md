@@ -1,6 +1,6 @@
 ---
 title: "Yellow — El Médano"
-number: "30"
+number: "23"
 date: 2026-07-08T09:00:00+01:00
 weight: 31
 cover: "01.jpg"

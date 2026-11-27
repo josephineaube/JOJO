@@ -1,6 +1,6 @@
 ---
 title: "Portrait de Cecilia"
-number: "10"
+number: "07"
 date: 2025-12-18T09:00:00+01:00
 weight: 10
 cover: "01.jpg"

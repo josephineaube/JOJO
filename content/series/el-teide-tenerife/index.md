@@ -1,6 +1,6 @@
 ---
 title: "El Teide — Tenerife"
-number: "27"
+number: "20"
 date: 2026-06-21T09:00:00+01:00
 weight: 28
 cover: "01.jpg"

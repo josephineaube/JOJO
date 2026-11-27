@@ -1,6 +1,6 @@
 ---
 title: "Tenerife — Gran Canaria"
-number: "14"
+number: "10"
 date: 2026-01-25T09:00:00+01:00
 weight: 14
 cover: "01.jpg"

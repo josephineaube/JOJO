@@ -1,6 +1,6 @@
 ---
 title: "Tenerife 2026"
-number: "42"
+number: "35"
 date: 2026-10-25T09:00:00+01:00
 weight: 43
 cover: "01.jpg"

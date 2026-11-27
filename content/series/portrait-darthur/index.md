@@ -1,6 +1,6 @@
 ---
 title: "Portrait d’Arthur"
-number: "20"
+number: "14"
 date: 2026-03-08T09:00:00+01:00
 weight: 20
 cover: "01.jpg"

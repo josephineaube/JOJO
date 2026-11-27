@@ -1,6 +1,6 @@
 ---
 title: "Playa de Berruguete"
-number: "25"
+number: "18"
 date: 2026-05-17T09:00:00+01:00
 weight: 26
 cover: "01.jpg"
