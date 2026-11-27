@@ -158,14 +158,10 @@ main { padding: 0 2rem; max-width: 1240px; margin: 0 auto; }
 .sec-head h2::before { content: "— "; color: var(--green); }
 .sec-head p { margin: 0; }
 
-/* ——— accueil : sélection paysages ——— */
-.pay-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 1.8rem 1.2rem; }
+/* ——— accueil : sélection paysages (4 images, même grille que les publications) ——— */
+.pay-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(258px, 1fr)); gap: 2.4rem 1.4rem; }
 .pay-tile { text-decoration: none; display: block; }
-.pay-tile.big { grid-column: span 3; }
-.pay-tile.sq { grid-column: span 2; }
-.pay-img { overflow: hidden; background: var(--green-soft); }
-.pay-tile.big .pay-img { aspect-ratio: 4/5; }
-.pay-tile.sq .pay-img { aspect-ratio: 1/1; }
+.pay-img { aspect-ratio: 4/5; overflow: hidden; background: var(--green-soft); }
 .pay-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .7s cubic-bezier(.2,.7,.2,1); }
 .pay-tile:hover .pay-img img { transform: scale(1.03); }
 .pay-tile p { margin: .6rem 0 0; font-size: .66rem; color: var(--ink-2); }
@@ -230,8 +226,6 @@ main { padding: 0 2rem; max-width: 1240px; margin: 0 auto; }
   display: block; font-family: var(--mono); font-size: .64rem; font-weight: 500;
   letter-spacing: .12em; text-transform: uppercase; color: var(--ink-2);
 }
-.series-intro { max-width: var(--measure); margin-top: 1.5rem; color: var(--ink-2); }
-.series-intro p { margin: 0 0 .8rem; }
 
 /* Photos en grille : 3 colonnes (4 sur grand écran), ratio NATUREL
    (aucun recadrage : les originaux sont en 4:5 ou 3:4), vignette 760 px. */
@@ -321,12 +315,6 @@ main { padding: 0 2rem; max-width: 1240px; margin: 0 auto; }
   .stack { grid-template-columns: repeat(4, 1fr); gap: 1.4rem .9rem; }
 }
 
-@media (max-width: 1000px) {
-  .pay-grid { grid-template-columns: repeat(4, 1fr); }
-  .pay-tile.big { grid-column: span 2; }
-  .pay-tile.sq { grid-column: span 2; }
-}
-
 @media (max-width: 760px) {
   body { font-size: 1rem; }
   main { padding: 0 1.15rem; }
@@ -342,9 +330,7 @@ main { padding: 0 2rem; max-width: 1240px; margin: 0 auto; }
   .btn { padding: .8rem 1.05rem; font-size: .7rem; letter-spacing: .08em; }
   .sec-head { margin-top: 2.6rem; }
   .sec-head h2 { font-size: 1.1rem; }
-  .pay-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-  .pay-tile.big, .pay-tile.sq { grid-column: span 1; }
-  .pay-tile.big .pay-img, .pay-tile.sq .pay-img { aspect-ratio: 4/5; }
+  .pay-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.7rem 1rem; }
   .pub-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 1.7rem 1rem; }
   .pub-meta h3 { font-size: 1rem; }
   .stack { grid-template-columns: repeat(2, 1fr); gap: 1.2rem .8rem; }

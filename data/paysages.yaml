@@ -6,19 +6,13 @@ hero:
   kicker: "Mer · sable · lumière"
   title: "Les Canaries"
 
+# Les quatre images de la section « Paysages » de l'accueil (première photo de chaque série).
 paysages:
-  - slug: tenerife-gran-canaria
+  - slug: yellow-el-medano
     photo: 1
-    style: big
-  - slug: el-medano
-    photo: 13
-    style: big
   - slug: las-palmas-gran-canaria
-    photo: 5
-    style: sq
-  - slug: tenerife-gran-canaria
-    photo: 3
-    style: sq
-  - slug: canary-islands
-    photo: 9
-    style: sq
+    photo: 1
+  - slug: el-medano
+    photo: 1
+  - slug: ete-normand
+    photo: 1

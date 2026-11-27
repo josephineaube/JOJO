@@ -19,18 +19,15 @@
     {{ end }}
   </header>
 
-  {{ with .Content }}<div class="series-intro">{{ . }}</div>{{ end }}
-
   <div class="stack">
     {{ range $i := seq 1 .Params.photos }}
     {{ $n := printf "%02d" $i }}
     {{ $full := $.Resources.Get (printf "%s.jpg" $n) }}
-    {{ $cap := $.Title }}{{ with $.Params.lieu }}{{ if not (in $cap .) }}{{ $cap = printf "%s — %s" $cap . }}{{ end }}{{ end }}
     {{ $alt := printf "%s, photographie %d sur %d" $.Title $i $.Params.photos }}
     {{ with $.Params.lieu }}{{ $alt = printf "%s, %s" $alt . }}{{ end }}
     {{ $alt = printf "%s, %s" $alt ($.Date.Format "2006") }}
     <figure>
-      <a class="zoom" href="{{ with $full }}{{ .RelPermalink }}{{ end }}" data-caption="{{ $cap }}" data-index="{{ $i }}">
+      <a class="zoom" href="{{ with $full }}{{ .RelPermalink }}{{ end }}" data-index="{{ $i }}">
         {{ partial "picture.html" (dict "page" $ "n" $i "role" "stack" "alt" $alt
             "loading" (cond (lt $i 3) "eager" "lazy")) }}
       </a>
@@ -50,7 +47,6 @@
   <figure>
     <img alt="">
     <figcaption>
-      <span id="lb-caption"></span>
       <span id="lb-count"></span>
     </figcaption>
   </figure>
@@ -61,7 +57,6 @@
 (function(){
   var lb = document.getElementById('lightbox');
   var img = lb.querySelector('img');
-  var cap = document.getElementById('lb-caption');
   var cnt = document.getElementById('lb-count');
   var links = Array.prototype.slice.call(document.querySelectorAll('.stack .zoom'));
   var idx = 0, total = links.length, lastFocus = null;
@@ -71,7 +66,6 @@
     var a = links[idx];
     img.src = a.getAttribute('href');
     img.alt = a.querySelector('img') ? a.querySelector('img').alt : '';
-    cap.textContent = a.getAttribute('data-caption');
     cnt.textContent = String(idx + 1).padStart(2, '0') + ' / ' + String(total).padStart(2, '0');
   }
   function open(i){

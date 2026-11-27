@@ -8,7 +8,21 @@
 {{- $thumb := printf "thumbs/%s/%s" $slug $n -}}
 {{- $alt := .alt | default .page.Title -}}
 
-{{- if eq $role "stack" -}}
+{{- if eq $role "feature" -}}
+{{- /* Accueil, section Paysages : 4 vignettes alignées sur la grille des publications,
+       même cadrage 4/5, mais jusqu'au webp 900 px pour la netteté. */ -}}
+{{- $sizes := .sizes | default "(max-width: 760px) 46vw, (max-width: 1000px) 30vw, 280px" -}}
+<picture>
+  <source type="image/avif"
+          srcset="{{ printf "%s-400.avif" $thumb | relURL }} 400w, {{ printf "%s.avif" $thumb | relURL }} 760w"
+          sizes="{{ $sizes }}">
+  <source type="image/webp"
+          srcset="{{ printf "%s-400.webp" $thumb | relURL }} 400w, {{ printf "%s.webp" $thumb | relURL }} 760w, {{ printf "%s-900.webp" (printf "full/%s/%s" $slug $n) | relURL }} 900w"
+          sizes="{{ $sizes }}">
+  <img src="{{ printf "%s.webp" $thumb | relURL }}" width="760" height="950"
+       alt="{{ $alt }}" loading="{{ .loading | default "lazy" }}" decoding="async">
+</picture>
+{{- else if eq $role "stack" -}}
 {{- /* Page publication : ratio NATUREL (pas de recadrage), vignettes 400/760 px,
        webp 900 px en candidat haute densité. 3 colonnes ≤1300 px, 4 au-delà ;
        2 colonnes ≤760 px, 1 ≤560 px. La visionneuse ouvre le JPEG d'origine. */ -}}

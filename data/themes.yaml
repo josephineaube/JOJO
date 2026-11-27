@@ -27,13 +27,9 @@ themes:
     slugs:
       - portrait-ete-2026
       - portrait-damis
-      - portrait-noir-et-blanc
       - portrait-darthur
       - portrait-de-cecilia
-      - portrait-de-manon
-      - portrait-de-pauline
       - portrait-mariya-cesar
-      - nathanael-halima
       - amis-en-noir-et-blanc
       - ensemble-de-portraits
 
@@ -46,12 +42,10 @@ themes:
       - guinguette-electro
       - noir-et-blanc-hiver
       - luc-sur-mer
-      - en-ete
       - en-couleur
       - dans-les-airs
       - en-vol
       - lete
-      - tour-de-france
       - une-belle-soiree
       - bonus-fin-de-pellicule
       - eclipse
@@ -67,7 +61,6 @@ themes:
       - noir-et-blanc-hiver
       - canary-islands
       - a-la-mer
-      - bonne-annee
 
   - id: noir-et-blanc
     label: Noir & blanc
@@ -76,6 +69,5 @@ themes:
       - tenerife-2026
       - el-medano-noir-et-blanc
       - noir-et-blanc-hiver
-      - portrait-noir-et-blanc
       - amis-en-noir-et-blanc
       - playa-de-berruguete

@@ -27,18 +27,18 @@
 <section class="paysages">
   <div class="sec-head">
     <h2>Paysages</h2>
-    <p class="mono dim">Une sélection, prise dans les publications</p>
+    <p class="mono dim">Les premières images de quatre séries</p>
   </div>
   <div class="pay-grid">
     {{ range $data.paysages }}
-    {{ $slug := .slug }}{{ $n := .photo }}{{ $style := .style }}
+    {{ $slug := .slug }}{{ $n := .photo }}
     {{ with site.GetPage (printf "series/%s" $slug) }}
     {{ $t := .Title }}
     {{ $alt := printf "%s — paysage" $t }}
     {{ with .Params.lieu }}{{ $alt = printf "%s, %s" $t . }}{{ end }}
-    <a class="pay-tile {{ $style }}" href="{{ .RelPermalink }}">
+    <a class="pay-tile" href="{{ .RelPermalink }}">
       <div class="pay-img">
-        {{ partial "picture.html" (dict "page" . "n" $n "role" "tile" "alt" $alt) }}
+        {{ partial "picture.html" (dict "page" . "n" $n "role" "feature" "alt" $alt) }}
       </div>
       <p class="mono dim">Nº {{ .Params.number }} · {{ .Title }}{{ with .Params.lieu }} · {{ . }}{{ end }}</p>
     </a>
@@ -53,7 +53,7 @@
     <p class="mono dim"><a class="arrow" href="{{ "/series/" | relURL }}">Tout l’archive →</a></p>
   </div>
   <div class="pub-grid">
-    {{ range first 9 $pubs }}
+    {{ range first 4 $pubs }}
     {{ $t := .Title }}
     {{ $alt := printf "%s — photographie de couverture" $t }}
     {{ with .Params.lieu }}{{ $alt = printf "%s, %s" $t . }}{{ end }}
